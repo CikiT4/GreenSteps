@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenSteps - Dashboard</title>
+  <link href="/styles.css" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white shadow-sm border-b sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <div class="avatar cursor-pointer" id="profile-avatar">
+          <img src="/placeholder.svg?height=40&width=40" alt="Avatar pengguna" class="rounded-full w-10 h-10">
+        </div>
+        <div>
+          <h1 class="font-bold text-green-800">GreenSteps</h1>
+          <p class="text-sm text-gray-600" id="user-greeting">Halo, Pengguna</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input type="text" placeholder="Cari..." id="search-input" class="pl-10 w-64 p-2 border rounded">
+        </div>
+        <button class="p-2 rounded-full hover:bg-gray-100" id="notification-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 py-6">
+    <!-- Beranda Section -->
+    <section id="beranda-section" class="space-y-6" aria-label="Beranda feed">
+      <!-- Posts will be dynamically inserted here -->
+    </section>
+
+    <!-- Misi Section -->
+    <section id="misi-section" class="hidden" aria-label="Misi dan tantangan">
+      <div class="tabs">
+        <div class="tabs-list grid grid-cols-2">
+          <button class="tab-trigger active" data-tab="tantangan">Tantangan</button>
+          <button class="tab-trigger" data-tab="rank">Peringkat</button>
+        </div>
+        
+        <div class="tab-content active" id="tantangan-tab">
+          <!-- Missions will be dynamically inserted here -->
+        </div>
+        
+        <div class="tab-content" id="rank-tab">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500 mr-2">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+                Top 15 Kontributor
+              </h2>
+            </div>
+            <div class="card-content">
+              <div class="space-y-3" id="ranking-list">
+                <!-- Ranking users will be dynamically inserted here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Post Section -->
+    <section id="post-section" class="hidden" aria-label="Buat postingan baru">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Buat Postingan Baru</h2>
+        </div>
+        <div class="card-content space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2">Konten</label>
+            <textarea id="post-content" placeholder="Bagikan pengalaman atau informasi tentang lingkungan..." class="w-full p-3 border rounded-lg resize-none h-32"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2">Topik</label>
+            <select id="post-topic" class="w-full p-3 border rounded-lg">
+              <option value="lingkungan">Lingkungan</option>
+              <option value="hewan">Hewan</option>
+              <option value="tumbuhan">Tumbuhan</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2">Upload Gambar/Video</label>
+            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 mx-auto mb-4">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+              <p class="text-gray-500">Klik untuk upload gambar atau video</p>
+              <input type="file" id="post-media" class="hidden" accept="image/*,video/*">
+            </div>
+          </div>
+
+          <button id="create-post-button" class="w-full bg-green-600 hover:bg-green-700 text-white p-2 rounded">
+            Posting
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- AR Section -->
+    <section id="ar-section" class="hidden space-y-6" aria-label="Fitur AR">
+      <div class="card cursor-pointer hover:shadow-lg transition-shadow">
+        <div class="card-content p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <div class="bg-blue-100 p-3 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold">Simulasi Pemungutan Sampah</h3>
+                <p class="text-gray-600">Pelajari cara memilah dan mengumpulkan sampah dengan benar</p>
+              </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+          <button id="simulation-button" class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded">
+            Mulai Simulasi
+          </button>
+        </div>
+      </div>
+
+      <div class="card cursor-pointer hover:shadow-lg transition-shadow">
+        <div class="card-content p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <div class="bg-green-100 p-3 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+                  <path d="M7 10v12"></path>
+                  <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold">Scanning dan Pengenalan Sampah</h3>
+                <p class="text-gray-600">Identifikasi jenis sampah menggunakan teknologi AI</p>
+              </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+          <button id="scanning-button" class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white p-2 rounded">
+            Mulai Scanning
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perpustakaan Section -->
+    <section id="perpustakaan-section" class="hidden space-y-6" aria-label="Perpustakaan artikel">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Filter Berdasarkan Provinsi</h2>
+        </div>
+        <div class="card-content">
+          <select id="province-filter" class="w-full p-3 border rounded-lg">
+            <option value="semua">Semua</option>
+            <option value="dki jakarta">DKI Jakarta</option>
+            <option value="jawa barat">Jawa Barat</option>
+            <option value="jawa tengah">Jawa Tengah</option>
+            <option value="jawa timur">Jawa Timur</option>
+            <option value="sumatera utara">Sumatera Utara</option>
+            <option value="sumatera barat">Sumatera Barat</option>
+            <option value="bali">Bali</option>
+            <option value="kalimantan timur">Kalimantan Timur</option>
+            <option value="sulawesi selatan">Sulawesi Selatan</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid gap-6" id="articles-container">
+        <!-- Articles will be dynamically inserted here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="flex justify-around py-2">
+        <button id="beranda-button" class="flex flex-col items-center py-3 px-4 bg-green-600 text-white rounded">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-1">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span class="text-xs">Beranda</span>
+        </button>
+
+        <button id="misi-button" class="flex flex-col items-center py-3 px-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-1">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+          <span class="text-xs">Misi</span>
+        </button>
+
+        <button id="post-button" class="flex flex-col items-center py-3 px-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-1">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span class="text-xs">Post</span>
+        </button>
+
+        <button id="ar-button" class="flex flex-col items-center py-3 px-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-1">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+          <span class="text-xs">AR</span>
+        </button>
+
+        <button id="perpustakaan-button" class="flex flex-col items-center py-3 px-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-1">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span class="text-xs">Perpustakaan</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if user is logged in
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (!currentUser) {
+        window.location.href = '/index.html';
+        return;
+      }
+
+      // Set user greeting
+      document.getElementById('user-greeting').textContent = `Halo, ${currentUser.name}`;
+      document.getElementById('profile-avatar').querySelector('img').src = currentUser.avatar;
+
+      // Navigation tabs
+      const sections = ['beranda', 'misi', 'post', 'ar', 'perpustakaan'];
+      sections.forEach(section => {
+        document.getElementById(`${section}-button`).addEventListener('click', function() {
+          // Hide all sections
+          sections.forEach(s => {
+            document.getElementById(`${s}-section`).classList.add('hidden');
+            document.getElementById(`${s}-button`).classList.remove('bg-green-600', 'text-white', 'rounded');
+          });
+          
+          // Show selected section
+          document.getElementById(`${section}-section`).classList.remove('hidden');
+          this.classList.add('bg-green-600', 'text-white', 'rounded');
+        });
+      });
+
+      // Handle tab switching in mission section
+      const tabTriggers = document.querySelectorAll('.tab-trigger');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function() {
+          // Remove active class from all triggers and contents
+          tabTriggers.forEach(t => t.classList.remove('active'));
+          tabContents.forEach(c => c.classList.remove('active'));
+          
+          // Add active class to clicked trigger
+          this.classList.add('active');
+          
+          // Show corresponding content
+          const tabId = this.getAttribute('data-tab');
+          document.getElementById(`${tabId}-tab`).classList.add('active');
+        });
+      });
+
+      // Load sample posts
+      const samplePosts = [
+        {
+          id: 1,
+          userId: 1,
+          userName: "Andi Pratama",
+          userAvatar: "/placeholder.svg?height=40&width=40",
+          content: "Hari ini saya ikut kegiatan bersih-bersih pantai di Ancol. Mari kita jaga kebersihan laut Indonesia! 🌊",
+          image: "/placeholder.svg?height=300&width=400",
+          topic: "lingkungan",
+          likes: 24,
+          comments: 8,
+          timestamp: "2 jam yang lalu"
+        },
+        {
+          id: 2,
+          userId: 2,
+          userName: "Sari Dewi",
+          userAvatar: "/placeholder.svg?height=40&width=40",
+          content: "Menemukan burung langka di hutan dekat rumah. Kita harus melindungi habitat mereka!",
+          image: "/placeholder.svg?height=300&width=400",
+          topic: "hewan",
+          likes: 18,
+          comments: 5,
+          timestamp: "4 jam yang lalu"
+        }
+      ];
+
+      const berandaSection = document.getElementById('beranda-section');
+      samplePosts.forEach(post => {
+        berandaSection.innerHTML += `
+          <div class="card">
+            <div class="card-header">
+              <div class="flex items-center space-x-3">
+                <div class="avatar">
+                  <img src="${post.userAvatar}" alt="${post.userName}" class="rounded-full w-10 h-10">
+                </div>
+                <div>
+                  <p class="font-semibold">${post.userName}</p>
+                  <p class="text-sm text-gray-500">${post.timestamp}</p>
+                </div>
+                <span class="badge">${post.topic}</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <p class="mb-4">${post.content}</p>
+              ${post.image ? `<img src="${post.image}" alt="Post content" class="w-full rounded-lg mb-4">` : ''}
+              <div class="flex items-center space-x-6">
+                <button class="like-button" data-post-id="${post.id}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                  <span>${post.likes}</span>
+                </button>
+                <button>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                  </svg>
+                  <span>${post.comments}</span>
+                </button>
+                <button>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                  </svg>
+                  <span>Bagikan</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      // Load sample missions
+      const sampleMissions = [
+        {
+          id: 1,
+          title: "Bersihkan 10 Sampah Plastik",
+          description: "Kumpulkan dan buang 10 sampah plastik di area sekitar rumah Anda",
+          points: 50,
+          difficulty: "Easy",
+          category: "Kebersihan",
+          completedBy: []
+        },
+        {
+          id: 2,
+          title: "Tanam 1 Pohon",
+          description: "Tanam satu pohon di area yang membutuhkan penghijauan",
+          points: 100,
+          difficulty: "Medium",
+          category: "Penghijauan",
+          completedBy: []
+        },
+        {
+          id: 3,
+          title: "Edukasi 5 Orang tentang Lingkungan",
+          description: "Berikan edukasi kepada 5 orang tentang pentingnya menjaga lingkungan",
+          points: 150,
+          difficulty: "Hard",
+          category: "Edukasi",
+          completedBy: []
+        }
+      ];
+
+      const tantanganTab = document.getElementById('tantangan-tab');
+      sampleMissions.forEach(mission => {
+        tantanganTab.innerHTML += `
+          <div class="card mb-4">
+            <div class="card-header">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold">${mission.title}</h3>
+                <span class="badge ${
+                  mission.difficulty === "Easy" ? "bg-green-100 text-green-800" : 
+                  mission.difficulty === "Medium" ? "bg-yellow-100 text-yellow-800" : 
+                  "bg-red-100 text-red-800"
+                }">${mission.difficulty}</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <p class="text-gray-600 mb-4">${mission.description}</p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                  <span class="badge outline">${mission.category}</span>
+                  <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500 mr-1">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <span class="font-semibold">${mission.points} poin</span>
+                  </div>
+                </div>
+                <button class="take-mission-button bg-green-600 hover:bg-green-700 text-white p-2 rounded" data-mission-id="${mission.id}">
+                  Ambil Misi
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      // Load sample articles
+      const articles = [
+        {
+          id: 1,
+          title: "Krisis Air Bersih di Jakarta",
+          province: "DKI Jakarta",
+          category: "Lingkungan",
+          excerpt: "Penurunan kualitas air tanah di Jakarta mencapai tingkat yang mengkhawatirkan...",
+          image: "/placeholder.svg?height=200&width=300"
+        },
+        {
+          id: 2,
+          title: "Deforestasi Hutan Kalimantan",
+          province: "Kalimantan Timur",
+          category: "Hutan",
+          excerpt: "Laju deforestasi di Kalimantan terus meningkat akibat ekspansi perkebunan...",
+          image: "/placeholder.svg?height=200&width=300"
+        },
+        {
+          id: 3,
+          title: "Pencemaran Laut di Bali",
+          province: "Bali",
+          category: "Laut",
+          excerpt: "Sampah plastik mengancam ekosistem laut dan pariwisata Bali...",
+          image: "/placeholder.svg?height=200&width=300"
+        }
+      ];
+
+      function renderArticles(provinceFilter = 'semua') {
+        const articlesContainer = document.getElementById('articles-container');
+        articlesContainer.innerHTML = '';
+        
+        const filteredArticles = provinceFilter === 'semua' 
+          ? articles 
+          : articles.filter(article => article.province.toLowerCase() === provinceFilter.toLowerCase());
+        
+        filteredArticles.forEach(article => {
+          articlesContainer.innerHTML += `
+            <div class="card cursor-pointer hover:shadow-lg transition-shadow">
+              <div class="flex">
+                <img src="${article.image}" alt="${article.title}" class="w-48 h-32 object-cover rounded-l-lg">
+                <div class="card-content flex-1 p-4">
+                  <div class="flex items-center space-x-2 mb-2">
+                    <span class="badge outline">${article.category}</span>
+                    <div class="flex items-center text-sm text-gray-500">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>
+                      ${article.province}
+                    </div>
+                  </div>
+                  <h3 class="text-lg font-bold mb-2">${article.title}</h3>
+                  <p class="text-gray-600 text-sm">${article.excerpt}</p>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      // Initialize articles
+      renderArticles();
+
+      // Handle province filter change
+      document.getElementById('province-filter').addEventListener('change', function() {
+        renderArticles(this.value);
+      });
+
+      // Handle AR buttons
+      document.getElementById('simulation-button').addEventListener('click', function() {
+        window.open('https://your-simulation-link.com', '_blank');
+      });
+
+      document.getElementById('scanning-button').addEventListener('click', function() {
+        window.open('https://your-scanning-link.com', '_blank');
+      });
+
+      // Handle profile avatar click
+      document.getElementById('profile-avatar').addEventListener('click', function() {
+        window.location.href = '/profile.html';
+      });
+
+      // Handle post creation
+      document.getElementById('create-post-button').addEventListener('click', function() {
+        const content = document.getElementById('post-content').value;
+        const topic = document.getElementById('post-topic').value;
+        
+        if (!content) return;
+        
+        const newPost = {
+          id: Date.now(),
+          userId: currentUser.id,
+          userName: currentUser.name,
+          userAvatar: currentUser.avatar,
+          content: content,
+          image: "/placeholder.svg?height=300&width=400",
+          topic: topic,
+          likes: 0,
+          comments: 0,
+          timestamp: "Baru saja"
+        };
+        
+        // Add post to beginning of beranda section
+        const postHTML = `
+          <div class="card">
+            <div class="card-header">
+              <div class="flex items-center space-x-3">
+                <div class="avatar">
+                  <img src="${newPost.userAvatar}" alt="${newPost.userName}" class="rounded-full w-10 h-10">
+                </div>
+                <div>
+                  <p class="font-semibold">${newPost.userName}</p>
+                  <p class="text-sm text-gray-500">${newPost.timestamp}</p>
+                </div>
+                <span class="badge">${newPost.topic}</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <p class="mb-4">${newPost.content}</p>
+              ${newPost.image ? `<img src="${newPost.image}" alt="Post content" class="w-full rounded-lg mb-4">` : ''}
+              <div class="flex items-center space-x-6">
+                <button class="like-button" data-post-id="${newPost.id}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                  <span>${newPost.likes}</span>
+                </button>
+                <button>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                  </svg>
+                  <span>${newPost.comments}</span>
+                </button>
+                <button>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                  </svg>
+                  <span>Bagikan</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        berandaSection.insertAdjacentHTML('afterbegin', postHTML);
+        
+        // Clear form
+        document.getElementById('post-content').value = '';
+        document.getElementById('post-topic').value = 'lingkungan';
+        
+        // Switch to beranda tab
+        document.getElementById('beranda-button').click();
+      });
+    });
+  </script>
+</body>
+</html>
